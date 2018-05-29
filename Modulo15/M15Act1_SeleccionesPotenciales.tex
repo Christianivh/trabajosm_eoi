@@ -1,0 +1,1624 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Caso Analítica de Marketing},
+            pdfauthor={Christian Vasquez Hernandez},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Caso Analítica de Marketing}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Christian Vasquez Hernandez}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \date{}
+  \predate{}\postdate{}
+
+
+\begin{document}
+\maketitle
+
+\subsection{Práctica de Analítica de Marketing: Selección de
+Potenciales}\label{practica-de-analitica-de-marketing-seleccion-de-potenciales}
+
+El objetivo de esta práctica es seleccionar un conjunto de clientes que
+serán el objetivo de la próxima campaña comercial de venta de seguros de
+ahorro.
+
+Para ello se aporta la siguiente documentación:
+
+\begin{itemize}
+\tightlist
+\item
+  Fichero (``Campaña Historica Seguro Ahorro.csv'') con resultados
+  históricos.
+\item
+  Fichero (``Campaña Nueva Seguro de Ahorro.csv'') con clientes actuales
+  de la entidad de los que se quiere extraer un conjunto de potenciales.
+\end{itemize}
+
+Como datos significativos indicar que cada llamada a un cliente tiene un
+coste de 8 euros y la venta de un seguro de ahorro reporta un beneficio
+de 10 euros.
+
+\subsection{Entregables}\label{entregables}
+
+Para presentar la campaña será necesario aportar la siguiente
+documentación:
+
+La selección de potenciales tiene que realizarse con el objetivo de
+maximizar el beneficio de la campaña.
+
+\begin{itemize}
+\tightlist
+\item
+  Script de r con el procedimiento realizado para extraer los
+  potenciales.
+\item
+  Fichero en formato Word o PDF con la explicación de los procedimientos
+  realizados y las decisiones tomadas.
+\item
+  Fichero (``Campaña Nueva Seguro de Ahorro.csv'') con las
+  probabilidades asignadas a cada cliente en una variable llamada
+  PROBABILIDAD y una variable llamada POTENCIAL con valor 1 si el
+  cliente es seleccionado para la campaña y 0 si el cliente no es
+  seleccionado.
+\end{itemize}
+
+\subsection{Instrucciones y
+observaciones}\label{instrucciones-y-observaciones}
+
+La práctica se deberá realizar utilizando R como herramienta.
+
+Se puede utilizar cualquier técnica de clasificación aprendida durante
+el Master.
+
+Al final de la práctica se publicará un ranking con los resultados de
+las campañas de los alumnos ordenado por el beneficio obtenido en la
+campaña.
+
+\section{Solución}\label{solucion}
+
+Para la ejecución de este documento es importante que estén cargadas las
+librerias ROCR y CaTools mediante los comandos library(ROCR) y
+library(caTools)
+
+Fijamos el directorio de trabajo en la carpeta donde esté contenido el
+fichero ``Campaña Historica Seguro Ahorro.csv'' y ``Campaña Nueva Seguro
+de Ahorro.csv'' mediante el comando setwd.
+
+Comenzamos con los carga del dataset en dos dataframe uno con
+informacion historica y otra con la informacion nueva.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_segurohistorica=}\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"Campaña Historica Seguro Ahorro.csv"}\NormalTok{)}
+\NormalTok{df_seguronueva=}\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"Campaña Nueva Seguro Ahorro.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_segurohistorica}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS=}\KeywordTok{as.factor}\NormalTok{(df_segurohistorica}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Revisamos dataset y
+variables}\label{revisamos-dataset-y-variables}
+
+Comenzamos analizando la estructura del dataset, y las variables que
+tienen:
+
+\textbf{Información historica}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(df_segurohistorica)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    37500 obs. of  7 variables:
+##  $ COD_CLIENTE   : Factor w/ 37408 levels "CLI0000000450",..: 30264 24487 3362 2106 7876 5344 10398 17120 4711 5963 ...
+##  $ CAT_EDAD      : Factor w/ 4 levels "1_NULL","2_MINUS30",..: 2 2 4 4 4 4 4 4 4 4 ...
+##  $ ESTADO_CIVIL  : Factor w/ 2 levels "CASADO","SOLTERO": 2 2 2 1 1 1 1 2 1 2 ...
+##  $ NIVEL_ESTUDIOS: Factor w/ 4 levels "PRIMARIA","SECUNDARIA",..: 2 1 2 4 4 2 4 2 2 4 ...
+##  $ RANGO_INGRESOS: Factor w/ 4 levels "[1000-2000>",..: 2 1 2 2 4 1 1 2 2 1 ...
+##  $ CAMP_DEPOSITOS: Factor w/ 2 levels "0","1": 1 1 1 1 1 1 1 1 1 2 ...
+##  $ SEXO          : Factor w/ 2 levels "HOMBRE","MUJER": 1 2 1 1 1 2 1 1 2 1 ...
+\end{verbatim}
+
+Los primeros 6 registros del dataset para tener una primera impresión
+del contenido del dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(df_segurohistorica)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     COD_CLIENTE  CAT_EDAD ESTADO_CIVIL NIVEL_ESTUDIOS RANGO_INGRESOS
+## 1 CLI0046780637 2_MINUS30      SOLTERO     SECUNDARIA     [600-1000>
+## 2 CLI0043396577 2_MINUS30      SOLTERO       PRIMARIA    [1000-2000>
+## 3 CLI0006768677  4_PLUS40      SOLTERO     SECUNDARIA     [600-1000>
+## 4 CLI0003847700  4_PLUS40       CASADO    UNIVERSIDAD     [600-1000>
+## 5 CLI0010350442  4_PLUS40       CASADO    UNIVERSIDAD         >=2000
+## 6 CLI0008678857  4_PLUS40       CASADO     SECUNDARIA    [1000-2000>
+##   CAMP_DEPOSITOS   SEXO
+## 1              0 HOMBRE
+## 2              0  MUJER
+## 3              0 HOMBRE
+## 4              0 HOMBRE
+## 5              0 HOMBRE
+## 6              0  MUJER
+\end{verbatim}
+
+Los ultimos 6 registros del dataset para tener una primera impresión del
+contenido del dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(df_segurohistorica)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         COD_CLIENTE  CAT_EDAD ESTADO_CIVIL NIVEL_ESTUDIOS RANGO_INGRESOS
+## 37495 R_10457703398 2_MINUS30      SOLTERO     SECUNDARIA    [1000-2000>
+## 37496 CLI0021809054  4_PLUS40       CASADO    UNIVERSIDAD     [600-1000>
+## 37497 CLI0045075719 2_MINUS30      SOLTERO     SECUNDARIA     [600-1000>
+## 37498 CLI0048289519    1_NULL      SOLTERO   SIN_ESTUDIOS     [600-1000>
+## 37499 CLI0023569318  4_PLUS40      SOLTERO     SECUNDARIA     [600-1000>
+## 37500 CLI0010490840   3_30_40       CASADO     SECUNDARIA     [600-1000>
+##       CAMP_DEPOSITOS   SEXO
+## 37495              0 HOMBRE
+## 37496              0 HOMBRE
+## 37497              0 HOMBRE
+## 37498              0  MUJER
+## 37499              0  MUJER
+## 37500              1  MUJER
+\end{verbatim}
+
+\textbf{Información Nueva}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(df_seguronueva)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    12500 obs. of  6 variables:
+##  $ COD_CLIENTE   : Factor w/ 12493 levels "CLI0000001525",..: 8501 11222 8894 11811 1621 7344 7017 3347 8088 11771 ...
+##  $ CAT_EDAD      : Factor w/ 4 levels "1_NULL","2_MINUS30",..: 2 1 2 2 4 4 3 3 2 2 ...
+##  $ ESTADO_CIVIL  : Factor w/ 2 levels "CASADO","SOLTERO": 2 2 2 2 2 2 2 2 2 2 ...
+##  $ NIVEL_ESTUDIOS: Factor w/ 4 levels "PRIMARIA","SECUNDARIA",..: 2 3 1 1 4 2 1 1 2 3 ...
+##  $ RANGO_INGRESOS: Factor w/ 4 levels "[1000-2000>",..: 1 3 1 3 1 1 2 1 2 2 ...
+##  $ SEXO          : Factor w/ 2 levels "HOMBRE","MUJER": 1 1 2 1 2 2 1 2 2 1 ...
+\end{verbatim}
+
+Los primeros 6 registros del dataset para tener una primera impresión
+del contenido del dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(df_seguronueva)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     COD_CLIENTE  CAT_EDAD ESTADO_CIVIL NIVEL_ESTUDIOS RANGO_INGRESOS
+## 1 CLI0043828980 2_MINUS30      SOLTERO     SECUNDARIA    [1000-2000>
+## 2 CLI0062632001    1_NULL      SOLTERO   SIN_ESTUDIOS           <600
+## 3 CLI0044539972 2_MINUS30      SOLTERO       PRIMARIA    [1000-2000>
+## 4 CLI0074041049 2_MINUS30      SOLTERO       PRIMARIA           <600
+## 5 CLI0008226026  4_PLUS40      SOLTERO    UNIVERSIDAD    [1000-2000>
+## 6 CLI0041998439  4_PLUS40      SOLTERO     SECUNDARIA    [1000-2000>
+##     SEXO
+## 1 HOMBRE
+## 2 HOMBRE
+## 3  MUJER
+## 4 HOMBRE
+## 5  MUJER
+## 6  MUJER
+\end{verbatim}
+
+Los ultimos 6 registros del dataset para tener una primera impresión del
+contenido del dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tail}\NormalTok{(df_seguronueva)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         COD_CLIENTE  CAT_EDAD ESTADO_CIVIL NIVEL_ESTUDIOS RANGO_INGRESOS
+## 12495 CLI0044212914 2_MINUS30      SOLTERO     SECUNDARIA     [600-1000>
+## 12496 CLI0029558992  4_PLUS40      SOLTERO    UNIVERSIDAD    [1000-2000>
+## 12497 CLI0016501677  4_PLUS40      SOLTERO     SECUNDARIA           <600
+## 12498 CLI0018192189  4_PLUS40      SOLTERO     SECUNDARIA           <600
+## 12499 CLI0046003472 2_MINUS30      SOLTERO     SECUNDARIA           <600
+## 12500 CLI0016729552  4_PLUS40      SOLTERO     SECUNDARIA         >=2000
+##         SEXO
+## 12495 HOMBRE
+## 12496 HOMBRE
+## 12497 HOMBRE
+## 12498 HOMBRE
+## 12499 HOMBRE
+## 12500  MUJER
+\end{verbatim}
+
+Revisando los valores estadísticos de las variables para conocer de
+forma breve características básicas de los datos con los que estamos
+trabajando.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(df_segurohistorica)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         COD_CLIENTE         CAT_EDAD      ESTADO_CIVIL  
+##  CLI0025785429:    3   1_NULL   : 1651   CASADO : 4851  
+##  R_10418810039:    3   2_MINUS30:11600   SOLTERO:32649  
+##  CLI0002601704:    2   3_30_40  :10036                  
+##  CLI0004812180:    2   4_PLUS40 :14213                  
+##  CLI0006355407:    2                                    
+##  CLI0006662190:    2                                    
+##  (Other)      :37486                                    
+##       NIVEL_ESTUDIOS      RANGO_INGRESOS  CAMP_DEPOSITOS     SEXO      
+##  PRIMARIA    : 5710   [1000-2000>: 8150   0:25763        HOMBRE:18689  
+##  SECUNDARIA  :21283   [600-1000> :18781   1:11737        MUJER :18811  
+##  SIN_ESTUDIOS: 3057   <600       : 5793                                
+##  UNIVERSIDAD : 7450   >=2000     : 4776                                
+##                                                                        
+##                                                                        
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(df_seguronueva)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         COD_CLIENTE         CAT_EDAD     ESTADO_CIVIL  
+##  CLI0007476710:    2   1_NULL   : 526   CASADO : 1630  
+##  CLI0009053069:    2   2_MINUS30:3832   SOLTERO:10870  
+##  CLI0009696402:    2   3_30_40  :3378                  
+##  CLI0016690510:    2   4_PLUS40 :4764                  
+##  CLI0023165847:    2                                   
+##  CLI0042986753:    2                                   
+##  (Other)      :12488                                   
+##       NIVEL_ESTUDIOS     RANGO_INGRESOS     SEXO     
+##  PRIMARIA    :1951   [1000-2000>:2740   HOMBRE:6156  
+##  SECUNDARIA  :7116   [600-1000> :6278   MUJER :6344  
+##  SIN_ESTUDIOS: 968   <600       :1903                
+##  UNIVERSIDAD :2465   >=2000     :1579                
+##                                                      
+##                                                      
+## 
+\end{verbatim}
+
+\subsubsection{Bloque de creación de conjuntos de entrenamiento y
+test}\label{bloque-de-creacion-de-conjuntos-de-entrenamiento-y-test}
+
+Por este motivo dividimos nuestro conjunto de datos en tres conjuntos:
+entrenamiento(70\%), validación(15\%) y test(15\%). Para que todo el
+proceso sea reproducible se ha fijado una semilla mediante el comando
+set.seed.
+
+Primero se divide el conjunto total en dos conjuntos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{) }
+\NormalTok{SAMPLE =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(df_segurohistorica}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{SplitRatio =}\NormalTok{ .}\DecValTok{70}\NormalTok{)}
+\NormalTok{df_segurohistoricaTrain =}\StringTok{ }\KeywordTok{subset}\NormalTok{(df_segurohistorica, SAMPLE }\OperatorTok{==}\StringTok{ }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{df_segurohistoricaValTest =}\StringTok{ }\KeywordTok{subset}\NormalTok{(df_segurohistorica, SAMPLE }\OperatorTok{==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
+
+\NormalTok{SAMPLE =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(df_segurohistoricaValTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{SplitRatio =}\NormalTok{ .}\DecValTok{50}\NormalTok{)}
+\NormalTok{df_segurohistoricaVal=}\StringTok{ }\KeywordTok{subset}\NormalTok{(df_segurohistoricaValTest, SAMPLE }\OperatorTok{==}\StringTok{ }\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{df_segurohistoricaTest =}\StringTok{ }\KeywordTok{subset}\NormalTok{(df_segurohistoricaValTest, SAMPLE }\OperatorTok{==}\StringTok{ }\OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+De forma que tenemos 3 conjuntos df\_segurohistoricaTrain,
+df\_segurohistoricaVal y df\_segurohistoricaTest con 26'250, 5'624 y
+5'624 registros respectivamente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(df_segurohistorica)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 37500     7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(df_segurohistoricaTrain)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 26250     7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(df_segurohistoricaVal)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5624    7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(df_segurohistoricaTest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5626    7
+\end{verbatim}
+
+El uso del comando sample.split de la librería CaTools nos permite
+mantener el porcentaje de éxitos por conjunto en el 31.29\%
+aproximadamente como podemos comprobar:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(df_segurohistorica}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##     0     1 
+## 25763 11737
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(df_segurohistorica}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(df_segurohistorica}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3129867
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##     0     1 
+## 18034  8216
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prior=}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\NormalTok{prior}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3129905
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##    0    1 
+## 3864 1760
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3129445
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{table}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##    0    1 
+## 3865 1761
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1}\NormalTok{)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.313011
+\end{verbatim}
+
+\subsubsection{Bloque de análisis del poder predictivo de las
+variables}\label{bloque-de-analisis-del-poder-predictivo-de-las-variables}
+
+En este bloque vamos a analizar la capacidad predictiva individual
+univariable de cada variable. Esto nos permite conocer qué factores son
+los que afectan en la contratación del producto.
+
+Comenzamos mediante un gráfico que nos permite comparar el porcentaje de
+éxito de la campaña para las diferentes categorías de una variable
+(barras) y compararlas con el prior del dataset (línea roja). Para ello
+creamos la siguiente función:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relevancia=}\ControlFlowTok{function}\NormalTok{(Target,VariableCategorica)\{}
+\NormalTok{  levels=}\KeywordTok{levels}\NormalTok{(VariableCategorica)}
+\NormalTok{  colors=}\KeywordTok{c}\NormalTok{()}
+  \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(levels))\{}
+\NormalTok{    TABLA=}\KeywordTok{table}\NormalTok{(Target,VariableCategorica}\OperatorTok{==}\NormalTok{levels[i])}
+\NormalTok{    chi=}\KeywordTok{chisq.test}\NormalTok{(TABLA)}
+    \ControlFlowTok{if}\NormalTok{ (chi}\OperatorTok{$}\NormalTok{p.value}\OperatorTok{<}\FloatTok{0.05}\NormalTok{)\{}
+\NormalTok{      colors=}\KeywordTok{c}\NormalTok{(colors,}\StringTok{"green"}\NormalTok{)}
+\NormalTok{    \}}\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{      colors=}\KeywordTok{c}\NormalTok{(colors,}\StringTok{"gray"}\NormalTok{)}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\NormalTok{  TABLA=}\KeywordTok{table}\NormalTok{(Target,VariableCategorica)}
+\NormalTok{  plot=}\KeywordTok{barplot}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\NormalTok{TABLA[}\DecValTok{2}\NormalTok{,]}\OperatorTok{/}\NormalTok{(TABLA[}\DecValTok{1}\NormalTok{,]}\OperatorTok{+}\NormalTok{TABLA[}\DecValTok{2}\NormalTok{,]),}\DataTypeTok{ylim=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{),}\DataTypeTok{col=}\NormalTok{colors,}\DataTypeTok{cex.names=}\FloatTok{0.6}\NormalTok{)}
+  \KeywordTok{text}\NormalTok{(}\DataTypeTok{x=}\NormalTok{plot, }\DataTypeTok{y=}\DecValTok{5}\OperatorTok{+}\DecValTok{100}\OperatorTok{*}\NormalTok{TABLA[}\DecValTok{2}\NormalTok{,]}\OperatorTok{/}\NormalTok{(TABLA[}\DecValTok{1}\NormalTok{,]}\OperatorTok{+}\NormalTok{TABLA[}\DecValTok{2}\NormalTok{,]),}\DataTypeTok{labels=}\KeywordTok{paste}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\DecValTok{100}\OperatorTok{*}\NormalTok{TABLA[}\DecValTok{2}\NormalTok{,]}\OperatorTok{/}\NormalTok{(TABLA[}\DecValTok{1}\NormalTok{,]}\OperatorTok{+}\NormalTok{TABLA[}\DecValTok{2}\NormalTok{,]),}\DecValTok{2}\NormalTok{),}\StringTok{"%"}\NormalTok{,}\DataTypeTok{sep=}\StringTok{""}\NormalTok{))}
+  \KeywordTok{abline}\NormalTok{(}\DataTypeTok{h=}\DecValTok{100}\OperatorTok{*}\NormalTok{prior,}\DataTypeTok{col=}\StringTok{"red"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{woe_iv=}\ControlFlowTok{function}\NormalTok{(Target,VariableCategorica)\{}
+\NormalTok{  Tabla_WOE=}\KeywordTok{table}\NormalTok{(VariableCategorica,Target)}
+\NormalTok{  DF_WOE=}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{FRACASOS=}\NormalTok{Tabla_WOE[,}\DecValTok{1}\NormalTok{],}\DataTypeTok{EXITOS=}\NormalTok{Tabla_WOE[,}\DecValTok{2}\NormalTok{])}
+\NormalTok{  DF_WOE}\OperatorTok{$}\NormalTok{EXITOS_PORC=DF_WOE}\OperatorTok{$}\NormalTok{EXITOS}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(DF_WOE}\OperatorTok{$}\NormalTok{EXITOS)}
+\NormalTok{  DF_WOE}\OperatorTok{$}\NormalTok{FRACASOS_PORC=DF_WOE}\OperatorTok{$}\NormalTok{FRACASOS}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(DF_WOE}\OperatorTok{$}\NormalTok{FRACASOS)}
+\NormalTok{  DF_WOE}\OperatorTok{$}\NormalTok{WOE=}\KeywordTok{log}\NormalTok{(DF_WOE}\OperatorTok{$}\NormalTok{EXITOS_PORC}\OperatorTok{/}\NormalTok{DF_WOE}\OperatorTok{$}\NormalTok{FRACASOS_PORC)}
+\NormalTok{  DF_WOE}\OperatorTok{$}\NormalTok{IV=(DF_WOE}\OperatorTok{$}\NormalTok{EXITOS_PORC}\OperatorTok{-}\NormalTok{DF_WOE}\OperatorTok{$}\NormalTok{FRACASOS_PORC)}\OperatorTok{*}\NormalTok{DF_WOE}\OperatorTok{$}\NormalTok{WOE}
+\NormalTok{  DF_WOE}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Relevancia por Edad
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{relevancia}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAT_EDAD)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/graph_edad-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{WOE_CAT_EDAD=}\KeywordTok{woe_iv}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAT_EDAD)}
+\NormalTok{WOE_CAT_EDAD}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           FRACASOS EXITOS EXITOS_PORC FRACASOS_PORC        WOE         IV
+## 1_NULL         972    173  0.02105648    0.05389819 -0.9398888 0.03086756
+## 2_MINUS30     6283   1879  0.22870010    0.34839747 -0.4209325 0.05038451
+## 3_30_40       3080   3902  0.47492697    0.17078851  1.0227350 0.31105306
+## 4_PLUS40      7699   2262  0.27531646    0.42691583 -0.4386657 0.06650144
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_CAT_EDAD=}\KeywordTok{sum}\NormalTok{(WOE_CAT_EDAD}\OperatorTok{$}\NormalTok{IV)}
+\NormalTok{IV_CAT_EDAD}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4588066
+\end{verbatim}
+
+Relevancia por Estado civil
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{relevancia}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{ESTADO_CIVIL)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/graph_married-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{WOE_ESTADO_CIVIL=}\KeywordTok{woe_iv}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{ESTADO_CIVIL)}
+\NormalTok{WOE_ESTADO_CIVIL}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         FRACASOS EXITOS EXITOS_PORC FRACASOS_PORC         WOE          IV
+## CASADO      2029   1338    0.162853     0.1125097  0.36980829 0.018617357
+## SOLTERO    16005   6878    0.837147     0.8874903 -0.05839787 0.002939939
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_ESTADO_CIVIL=}\KeywordTok{sum}\NormalTok{(WOE_ESTADO_CIVIL}\OperatorTok{$}\NormalTok{IV)}
+\NormalTok{IV_ESTADO_CIVIL}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0215573
+\end{verbatim}
+
+Relevancia por NIVEL ESTUDIOS
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{relevancia}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{NIVEL_ESTUDIOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/graph_study-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{WOE_NIVEL_ESTUDIOS=}\KeywordTok{woe_iv}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{NIVEL_ESTUDIO)}
+\NormalTok{WOE_NIVEL_ESTUDIOS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              FRACASOS EXITOS EXITOS_PORC FRACASOS_PORC        WOE
+## PRIMARIA         2908   1063  0.12938169    0.16125097 -0.2201951
+## SECUNDARIA       9304   5594  0.68086660    0.51591438  0.2774256
+## SIN_ESTUDIOS     1733    405  0.04929406    0.09609626 -0.6675468
+## UNIVERSIDAD      4089   1154  0.14045764    0.22673838 -0.4788909
+##                       IV
+## PRIMARIA     0.007017457
+## SECUNDARIA   0.045761963
+## SIN_ESTUDIOS 0.031242662
+## UNIVERSIDAD  0.041319059
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_NIVEL_ESTUDIOS=}\KeywordTok{sum}\NormalTok{(WOE_NIVEL_ESTUDIOS}\OperatorTok{$}\NormalTok{IV)}
+\NormalTok{IV_NIVEL_ESTUDIOS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1253411
+\end{verbatim}
+
+Relevancia por RANGO INGRESOS
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{relevancia}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{RANGO_INGRESOS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/graph_salary-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{WOE_RANGO_INGRESOS=}\KeywordTok{woe_iv}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{RANGO_INGRESOS)}
+\NormalTok{WOE_RANGO_INGRESOS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             FRACASOS EXITOS EXITOS_PORC FRACASOS_PORC         WOE
+## [1000-2000>     3801   1936   0.2356378     0.2107685  0.11153519
+## [600-1000>      9002   4058   0.4939143     0.4991682 -0.01058114
+## <600            3017   1061   0.1291383     0.1672951 -0.25887571
+## >=2000          2214   1161   0.1413096     0.1227681  0.14065626
+##                       IV
+## [1000-2000> 2.773795e-03
+## [600-1000>  5.559251e-05
+## <600        9.877880e-03
+## >=2000      2.607983e-03
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_RANGO_INGRESOS=}\KeywordTok{sum}\NormalTok{(WOE_RANGO_INGRESOS}\OperatorTok{$}\NormalTok{IV)}
+\NormalTok{IV_RANGO_INGRESOS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01531525
+\end{verbatim}
+
+Relevancia por SEXO
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{relevancia}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{SEXO)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/graph_gender-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{WOE_SEXO=}\KeywordTok{woe_iv}\NormalTok{(df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{SEXO)}
+\NormalTok{WOE_SEXO}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        FRACASOS EXITOS EXITOS_PORC FRACASOS_PORC        WOE         IV
+## HOMBRE     9662   3397   0.4134615     0.5357658 -0.2591326 0.03169301
+## MUJER      8372   4819   0.5865385     0.4642342  0.2338490 0.02860073
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_SEXO=}\KeywordTok{sum}\NormalTok{(WOE_SEXO}\OperatorTok{$}\NormalTok{IV)}
+\NormalTok{IV_SEXO}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06029374
+\end{verbatim}
+
+Podemos establecer un ranking de capacidad predictiva ordenando las
+variables en función a su IV:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_CAT_EDAD}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4588066
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_NIVEL_ESTUDIOS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1253411
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_SEXO}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.06029374
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_ESTADO_CIVIL}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0215573
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{IV_RANGO_INGRESOS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01531525
+\end{verbatim}
+
+\subsubsection{Bloque de Construcción de
+Modelos}\label{bloque-de-construccion-de-modelos}
+
+Comenzamos con el modelo más sencillo que incluye una sola variable
+independiente. Hemos seleccionado la variable CAT\_EDAD al ser la de
+mayor IV.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Modelo 1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Modelo 1"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo1=}\KeywordTok{glm}\NormalTok{(CAMP_DEPOSITOS}\OperatorTok{~}\NormalTok{CAT_EDAD, }\DataTypeTok{data=}\NormalTok{df_segurohistoricaTrain[,}\OperatorTok{-}\DecValTok{1}\NormalTok{],}\DataTypeTok{family=}\KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(modelo1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = CAMP_DEPOSITOS ~ CAT_EDAD, family = binomial(link = "logit"), 
+##     data = df_segurohistoricaTrain[, -1])
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2794  -0.7234  -0.7178   1.0788   1.9442  
+## 
+## Coefficients:
+##                   Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)       -1.72606    0.08252 -20.918  < 2e-16 ***
+## CAT_EDAD2_MINUS30  0.51896    0.08661   5.992 2.07e-09 ***
+## CAT_EDAD3_30_40    1.96262    0.08597  22.830  < 2e-16 ***
+## CAT_EDAD4_PLUS40   0.50122    0.08591   5.834 5.41e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 32627  on 26249  degrees of freedom
+## Residual deviance: 30035  on 26246  degrees of freedom
+## AIC: 30043
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Modelo 2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Modelo 2"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo2=}\KeywordTok{glm}\NormalTok{(CAMP_DEPOSITOS}\OperatorTok{~}\NormalTok{CAT_EDAD}\OperatorTok{+}\NormalTok{NIVEL_ESTUDIOS, }\DataTypeTok{data=}\NormalTok{df_segurohistoricaTrain[,}\OperatorTok{-}\DecValTok{1}\NormalTok{],}\DataTypeTok{family=}\KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(modelo2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = CAMP_DEPOSITOS ~ CAT_EDAD + NIVEL_ESTUDIOS, family = binomial(link = "logit"), 
+##     data = df_segurohistoricaTrain[, -1])
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.4338  -0.7694  -0.5960   0.9411   2.0891  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                -1.80336    0.11999 -15.029  < 2e-16 ***
+## CAT_EDAD2_MINUS30           0.16515    0.11498   1.436 0.150896    
+## CAT_EDAD3_30_40             1.81591    0.11629  15.615  < 2e-16 ***
+## CAT_EDAD4_PLUS40            0.38139    0.11569   3.297 0.000979 ***
+## NIVEL_ESTUDIOSSECUNDARIA    0.57254    0.04212  13.592  < 2e-16 ***
+## NIVEL_ESTUDIOSSIN_ESTUDIOS  0.07729    0.08711   0.887 0.374920    
+## NIVEL_ESTUDIOSUNIVERSIDAD  -0.42430    0.05233  -8.109 5.11e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 32627  on 26249  degrees of freedom
+## Residual deviance: 29313  on 26243  degrees of freedom
+## AIC: 29327
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Modelo 3"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Modelo 3"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo3=}\KeywordTok{glm}\NormalTok{(CAMP_DEPOSITOS}\OperatorTok{~}\NormalTok{CAT_EDAD}\OperatorTok{+}\NormalTok{NIVEL_ESTUDIOS}\OperatorTok{+}\NormalTok{SEXO, }\DataTypeTok{data=}\NormalTok{df_segurohistoricaTrain[,}\OperatorTok{-}\DecValTok{1}\NormalTok{],}\DataTypeTok{family=}\KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(modelo3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = CAMP_DEPOSITOS ~ CAT_EDAD + NIVEL_ESTUDIOS + SEXO, 
+##     family = binomial(link = "logit"), data = df_segurohistoricaTrain[, 
+##         -1])
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.5601  -0.8563  -0.6081   1.0481   2.2201  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                -2.10072    0.12198 -17.222  < 2e-16 ***
+## CAT_EDAD2_MINUS30           0.15983    0.11572   1.381  0.16724    
+## CAT_EDAD3_30_40             1.84013    0.11711  15.712  < 2e-16 ***
+## CAT_EDAD4_PLUS40            0.38746    0.11648   3.326  0.00088 ***
+## NIVEL_ESTUDIOSSECUNDARIA    0.57262    0.04241  13.502  < 2e-16 ***
+## NIVEL_ESTUDIOSSIN_ESTUDIOS  0.06942    0.08783   0.790  0.42933    
+## NIVEL_ESTUDIOSUNIVERSIDAD  -0.43461    0.05270  -8.247  < 2e-16 ***
+## SEXOMUJER                   0.55377    0.02898  19.111  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 32627  on 26249  degrees of freedom
+## Residual deviance: 28942  on 26242  degrees of freedom
+## AIC: 28958
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Modelo 4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Modelo 4"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo4=}\KeywordTok{glm}\NormalTok{(CAMP_DEPOSITOS}\OperatorTok{~}\NormalTok{CAT_EDAD}\OperatorTok{+}\NormalTok{NIVEL_ESTUDIOS}\OperatorTok{+}\NormalTok{SEXO}\OperatorTok{+}\NormalTok{ESTADO_CIVIL, }\DataTypeTok{data=}\NormalTok{df_segurohistoricaTrain[,}\OperatorTok{-}\DecValTok{1}\NormalTok{],}\DataTypeTok{family=}\KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(modelo4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = CAMP_DEPOSITOS ~ CAT_EDAD + NIVEL_ESTUDIOS + SEXO + 
+##     ESTADO_CIVIL, family = binomial(link = "logit"), data = df_segurohistoricaTrain[, 
+##     -1])
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.8994  -0.8504  -0.6419   1.0246   2.2599  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                -1.31099    0.12984 -10.097   <2e-16 ***
+## CAT_EDAD2_MINUS30           0.20442    0.11587   1.764   0.0777 .  
+## CAT_EDAD3_30_40             1.84575    0.11737  15.726   <2e-16 ***
+## CAT_EDAD4_PLUS40            0.21917    0.11733   1.868   0.0618 .  
+## NIVEL_ESTUDIOSSECUNDARIA    0.52905    0.04269  12.393   <2e-16 ***
+## NIVEL_ESTUDIOSSIN_ESTUDIOS  0.08940    0.08820   1.014   0.3108    
+## NIVEL_ESTUDIOSUNIVERSIDAD  -0.55240    0.05363 -10.301   <2e-16 ***
+## SEXOMUJER                   0.56005    0.02918  19.196   <2e-16 ***
+## ESTADO_CIVILSOLTERO        -0.81348    0.04556 -17.853   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 32627  on 26249  degrees of freedom
+## Residual deviance: 28624  on 26241  degrees of freedom
+## AIC: 28642
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\StringTok{"Modelo 5"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Modelo 5"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{modelo5=}\KeywordTok{glm}\NormalTok{(CAMP_DEPOSITOS}\OperatorTok{~}\NormalTok{., }\DataTypeTok{data=}\NormalTok{df_segurohistoricaTrain[,}\OperatorTok{-}\DecValTok{1}\NormalTok{],}\DataTypeTok{family=}\KeywordTok{binomial}\NormalTok{(}\DataTypeTok{link=}\StringTok{"logit"}\NormalTok{))}
+\KeywordTok{summary}\NormalTok{(modelo5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = CAMP_DEPOSITOS ~ ., family = binomial(link = "logit"), 
+##     data = df_segurohistoricaTrain[, -1])
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9100  -0.8487  -0.6409   1.0245   2.2626  
+## 
+## Coefficients:
+##                            Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)                -1.33667    0.13425  -9.957   <2e-16 ***
+## CAT_EDAD2_MINUS30           0.20508    0.11588   1.770   0.0768 .  
+## CAT_EDAD3_30_40             1.84951    0.11775  15.707   <2e-16 ***
+## CAT_EDAD4_PLUS40            0.22298    0.11759   1.896   0.0579 .  
+## ESTADO_CIVILSOLTERO        -0.81232    0.04579 -17.740   <2e-16 ***
+## NIVEL_ESTUDIOSSECUNDARIA    0.53025    0.04316  12.285   <2e-16 ***
+## NIVEL_ESTUDIOSSIN_ESTUDIOS  0.08884    0.08820   1.007   0.3138    
+## NIVEL_ESTUDIOSUNIVERSIDAD  -0.55328    0.05520 -10.024   <2e-16 ***
+## RANGO_INGRESOS[600-1000>    0.02157    0.03787   0.570   0.5689    
+## RANGO_INGRESOS<600          0.03233    0.05181   0.624   0.5327    
+## RANGO_INGRESOS>=2000        0.04502    0.05075   0.887   0.3750    
+## SEXOMUJER                   0.56000    0.02918  19.192   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 32627  on 26249  degrees of freedom
+## Residual deviance: 28623  on 26238  degrees of freedom
+## AIC: 28647
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+Podemos comprobar en el último modelo que para la variable sexo, ambas
+categorías tienen el mismo comportamiento por lo que no mejora la
+capacidad predictiva del modelo y no debería incluirse.
+
+De hecho si calculamos los AIC y BIC de todos los modelos podemos
+comprobar que el modelo4 es el que tiene los valores más bajos para
+ambas métricas por lo que es el que se ajusta mejor a los datos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{AIC}\NormalTok{(modelo1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30042.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{AIC}\NormalTok{(modelo2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 29326.93
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{AIC}\NormalTok{(modelo3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 28957.92
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{AIC}\NormalTok{(modelo4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 28641.67
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{AIC}\NormalTok{(modelo5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 28646.76
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{BIC}\NormalTok{(modelo1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30075.32
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{BIC}\NormalTok{(modelo2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 29384.16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{BIC}\NormalTok{(modelo3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 29023.32
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{BIC}\NormalTok{(modelo4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 28715.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{BIC}\NormalTok{(modelo5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 28744.87
+\end{verbatim}
+
+Las métricas AIC y BIC equilibran la ganancia de información al meter
+una nueva variable con la pérdida por complicar el modelo de forma que
+previenen la inclusión de factores que no aporten capacidad predictiva.
+
+\subsubsection{Bloque de evaluación y selección de
+modelo.}\label{bloque-de-evaluacion-y-seleccion-de-modelo.}
+
+Para evaluar y seleccionar un modelo vamos a utilizar una métrica
+ampliamente aceptada en los problemas de clasificación se utilice la
+técnica que se utilice: AUC (Area Under Curve) o área bajo la curva.
+
+En R podemos calcular el AUC de forma sencilla utlizando el paquete
+ROCR.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo1,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar=}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo1_train =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+\NormalTok{auc_modelo1_train}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6583474
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo1, }\DataTypeTok{newdata=}\NormalTok{df_segurohistoricaVal,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar =}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo1_val =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+\NormalTok{auc_modelo1_val}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6666602
+\end{verbatim}
+
+El AUC es una métrica que toma valores entre 0,5 y 1. Siendo 0,5 el
+valor que se corresponde con un modelo aleatorio y 1 el valor que se
+corresponde con un modelo que clasifica perfectamente.
+
+Para el primer modelo vemos que el AUC en entrenamiento 0,7020 es
+similar al AUC en validación 0,6986. Esto es importante puesto que nos
+muestra que el modelo tiene la misma capacidad predictiva en el conjunto
+en el que se ha entrenado que en otro conjunto del cual no se ha
+entrenado, confirmando que los patrones aprendidos por el modelo son
+generales, por lo que no se observa sobreajuste u overfitting.
+
+Calculamos la métrica AUC para el resto de modelos:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo2,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar=}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo2_train =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo2, }\DataTypeTok{newdata=}\NormalTok{df_segurohistoricaVal,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar =}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo2_val =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo3,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar=}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo3_train =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo3, }\DataTypeTok{newdata=}\NormalTok{df_segurohistoricaVal,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar =}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo3_val =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo4,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar=}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo4_train =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo4, }\DataTypeTok{newdata=}\NormalTok{df_segurohistoricaVal,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar =}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo4_val =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo5,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar=}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaTrain}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo5_train =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+
+\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo5, }\DataTypeTok{newdata=}\NormalTok{df_segurohistoricaVal,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar =}\StringTok{ }\KeywordTok{prediction}\NormalTok{(prediccion, df_segurohistoricaVal}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo5_val =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+\end{Highlighting}
+\end{Shaded}
+
+Representamos los resultados:
+
+\begin{verbatim}
+##             Modelo1   Modelo2   Modelo3   Modelo4   Modelo5
+## auc_train 0.6583474 0.7069584 0.7218755 0.7296157 0.7300907
+## auc_val   0.6666602 0.7165237 0.7270413 0.7390733 0.7385212
+\end{verbatim}
+
+Podemos apreciar que el modelo con mayor AUC en validación es el modelo
+4, por lo que este es el modelo elegido puesto que presenta los mejores
+resultados en el conjunto de validación. Es importante destacar que el
+modelo con mejor AUC en entrenamiento es el modelo5 y esto se debe a que
+siempre que se incluye una nueva variable el modelo resultante obtiene
+mejores resultados contra este conjunto de datos pero si el patrón no es
+general o la variable no tiene capacidad predictiva, se traduce en un
+empeoramiento de la capacidad predictiva del modelo como se aprecia en
+el conjunto de validación.
+
+Una vez elegido el modelo4 sólo nos queda evaluar su capacidad y esto se
+realiza utilizando el conjunto de test que no ha sido utilizado en
+ninguna parte del proceso de construcción y selección del modelo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion=}\KeywordTok{predict}\NormalTok{(modelo4, }\DataTypeTok{newdata=}\NormalTok{df_segurohistoricaTest,}\DataTypeTok{type=}\StringTok{"response"}\NormalTok{)}
+\NormalTok{Pred_auxiliar =}\StringTok{ }\KeywordTok{prediction}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion, df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS, }\DataTypeTok{label.ordering =} \OtherTok{NULL}\NormalTok{)}
+\NormalTok{auc.tmp =}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar, }\StringTok{"auc"}\NormalTok{);}
+\NormalTok{auc_modelo4_test =}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(auc.tmp}\OperatorTok{@}\NormalTok{y.values)}
+\NormalTok{auc_modelo4_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7357789
+\end{verbatim}
+
+En este caso el modelo resultante tiene un AUC de 0,7357. Gráficamente
+se puede representar de la siguiente manera para el conjunto de test:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CURVA_ROC_modelo4_train <-}\StringTok{ }\KeywordTok{performance}\NormalTok{(Pred_auxiliar,}\StringTok{"tpr"}\NormalTok{,}\StringTok{"fpr"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(CURVA_ROC_modelo4_train,}\DataTypeTok{colorize=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{abline}\NormalTok{(}\DataTypeTok{a=}\DecValTok{0}\NormalTok{,}\DataTypeTok{b=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\StringTok{"black"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/roctrain-1.pdf}
+
+Otra métrica habitual para representar la capacidad predictiva de un
+modelo es el Índice de Gini que se puede obtener fácilmente del AUC:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GINI_train=}\DecValTok{2}\OperatorTok{*}\NormalTok{auc_modelo4_train}\OperatorTok{-}\DecValTok{1}
+\NormalTok{GINI_train}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4592314
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GINI_test=}\DecValTok{2}\OperatorTok{*}\NormalTok{auc_modelo4_test}\OperatorTok{-}\DecValTok{1}
+\NormalTok{GINI_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4715579
+\end{verbatim}
+
+Como el Índice de Gini es una combinación lineal positiva del AUC, se
+podría haber realizado la selección de modelos utilizando el Índice de
+Gini en lugar del AUC.
+
+Para terminar con la valoración del modelo, podemos mostrar la capacidad
+del modelo de la siguiente manera:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.313011
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{aggregate}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{~}\NormalTok{df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,}\DataTypeTok{FUN=}\NormalTok{mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   df_segurohistoricaTest$CAMP_DEPOSITOS df_segurohistoricaTest$prediccion
+## 1                                     0                         0.2641764
+## 2                                     1                         0.4248821
+\end{verbatim}
+
+Como podemos apreciar, el éxito medio de la campaña es un 31,29\%.
+Nuestro modelo está asignando una probabilidad media del 42,48\% a
+aquellos que efectivamente fueron éxito de la campaña y un 26,41\% a
+aquellos que no fueron éxito, por lo que el modelo está discriminando.
+
+\subsubsection{Bloque de explotación del
+modelo}\label{bloque-de-explotacion-del-modelo}
+
+El modelo predictivo elegido nos asigna a cada cliente una probabilidad
+de éxito de la campaña, es decir, los ordena los clientes por su
+probabilidad de éxito de la campaña.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ALPHA=}\FloatTok{0.5}
+\NormalTok{Confusion_Test=}\KeywordTok{table}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS,df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{>=}\NormalTok{ALPHA)}
+\NormalTok{Confusion_Test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    
+##     FALSE TRUE
+##   0  3498  367
+##   1  1062  699
+\end{verbatim}
+
+En este caso seleccionaríamos 1'066 clientes (2ª columna 367+699), de
+los que 699 serían éxito. Las métricas asociadas a esta matriz de
+confusión serían:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Accuracy_Test=}\StringTok{ }\NormalTok{(}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{>=}\NormalTok{ALPHA)}\OperatorTok{+}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{0} \OperatorTok{&}\StringTok{ }\NormalTok{df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{<}\NormalTok{ALPHA))}\OperatorTok{/}\KeywordTok{length}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\NormalTok{Precision_Test=}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{>=}\NormalTok{ALPHA)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{>=}\NormalTok{ALPHA)}
+\NormalTok{Cobertura_Test=}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1} \OperatorTok{&}\StringTok{ }\NormalTok{df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion}\OperatorTok{>=}\NormalTok{ALPHA)}\OperatorTok{/}\KeywordTok{sum}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1}\NormalTok{)}
+\NormalTok{Accuracy_Test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7460007
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Precision_Test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6557223
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Cobertura_Test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3969336
+\end{verbatim}
+
+Podemos ver que el acierto sería del 74,60\% (acierto), pero más
+importante es que del conjunto seleccionado vamos a acertar en un
+65,57\% (precisión) y estamos llamando al 39,69\% de los éxitos
+(cobertura).
+
+Si modificamos el umbral a otros valores conseguimos seleccionar
+distintas cantidades de clientes con lo que podemos modificar los
+parámetros de éxito para adecuarlos a nuestras necesidades.
+
+\subsubsection{Bloque de selección de umbral como el punto de máxima
+discriminación}\label{bloque-de-seleccion-de-umbral-como-el-punto-de-maxima-discriminacion}
+
+Esta técnica calcula el umbral en el que existe la máxima
+discriminación, la cuantificación de la discriminación es una métrica
+que recibe el nombre KS y también es utilizada como métrica de capacidad
+predictiva de un modelo principalmente en modelos de scoring.
+
+Calculamos el punto de máxima discriminación:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BANK_KS=df_segurohistoricaTest[}\KeywordTok{order}\NormalTok{(df_segurohistoricaTest}\OperatorTok{$}\NormalTok{prediccion, }\DataTypeTok{decreasing=}\OtherTok{TRUE}\NormalTok{),}\KeywordTok{c}\NormalTok{(}\StringTok{"CAMP_DEPOSITOS"}\NormalTok{,}\StringTok{"prediccion"}\NormalTok{)]}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{N=}\DecValTok{1}\OperatorTok{:}\KeywordTok{length}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_ACUM=}\KeywordTok{cumsum}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS)}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_ACUM=BANK_KS}\OperatorTok{$}\NormalTok{N}\OperatorTok{-}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_ACUM}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_TOT=}\KeywordTok{sum}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{1}\NormalTok{)}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_TOT=}\KeywordTok{sum}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{CAMP_DEPOSITOS}\OperatorTok{==}\DecValTok{0}\NormalTok{)}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{TOTAL=BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_TOT}\OperatorTok{+}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_TOT}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{TPR=BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_ACUM}\OperatorTok{/}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_TOT}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FPR=BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_ACUM}\OperatorTok{/}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_TOT}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{DIFF=BANK_KS}\OperatorTok{$}\NormalTok{TPR}\OperatorTok{-}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FPR}
+\KeywordTok{plot}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{DIFF, }\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"discriminación")}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/calculoKS-1.pdf}
+
+el valor de la máxima discriminación se llama KS
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{KS=}\KeywordTok{max}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{DIFF)}
+\NormalTok{KS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3565192
+\end{verbatim}
+
+y el valor donde se alcanza este valor es el que nos va a permitir
+seleccionar el umbral 5644
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{which}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{DIFF}\OperatorTok{==}\NormalTok{KS)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1590
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BANK_KS[}\DecValTok{5095}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"CAMP_DEPOSITOS"}\NormalTok{,}\StringTok{"prediccion"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      CAMP_DEPOSITOS prediccion
+## 4084              0  0.1278564
+\end{verbatim}
+
+en este caso el umbral seleccionado de máxima discriminación sería
+
+\subsubsection{Bloque de selección de umbral como el punto óptimo
+estadístico
+(F1-Score)}\label{bloque-de-seleccion-de-umbral-como-el-punto-optimo-estadistico-f1-score}
+
+Esta técnica selecciona el umbral como el punto que optimiza la relación
+entre la precisión y la cobertura maximizando el F1-Score o F-Score.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{Accuracy=(BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_ACUM}\OperatorTok{+}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_TOT}\OperatorTok{-}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{FRACASOS_ACUM)}\OperatorTok{/}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{TOTAL}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{Precision=BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_ACUM}\OperatorTok{/}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{N}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{Cobertura=BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_ACUM}\OperatorTok{/}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{EXITOS_TOT}
+\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{F1Score=}\DecValTok{2}\OperatorTok{*}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{Precision}\OperatorTok{*}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{Cobertura)}\OperatorTok{/}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{Precision}\OperatorTok{+}\NormalTok{BANK_KS}\OperatorTok{$}\NormalTok{Cobertura)}
+\KeywordTok{plot}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{F1Score,}\DataTypeTok{xlab=}\StringTok{""}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"F1-Score"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{M15Act1_SeleccionesPotenciales_files/figure-latex/calculoF1-1.pdf}
+El punto donde se alcanzaría el máximo sería:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{max}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{F1Score)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.5644685
+\end{verbatim}
+
+y el valor donde se alcanza este valor es el que nos va a permitir
+seleccionar el umbral
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{which}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{F1Score}\OperatorTok{==}\KeywordTok{max}\NormalTok{(BANK_KS}\OperatorTok{$}\NormalTok{F1Score))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2303
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BANK_KS[}\DecValTok{8511}\NormalTok{,}\KeywordTok{c}\NormalTok{(}\StringTok{"CAMP_DEPOSITOS"}\NormalTok{,}\StringTok{"prediccion"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    CAMP_DEPOSITOS prediccion
+## NA           <NA>         NA
+\end{verbatim}
+
+en este caso el umbral seleccionado que maximiza el F1-Score es
+0.308060.
+
+
+\end{document}

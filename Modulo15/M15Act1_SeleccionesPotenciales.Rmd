@@ -4,6 +4,8 @@ author: "Christian Vasquez Hernandez"
 output:
   html_document:
     df_print: paged
+  pdf_document: default
+  word_document: default
 ---
 
 
@@ -415,6 +417,10 @@ auc_modelo4_test = as.numeric(auc.tmp@y.values)
 auc_modelo4_test
 ```
 
+``` {r }
+head(df_segurohistoricaTest)
+```
+
 En este caso el modelo resultante tiene un AUC de 0,7357. Gráficamente se puede representar de la siguiente manera para el conjunto de test:
 
 ```{r roctrain}
@@ -449,10 +455,25 @@ El modelo predictivo elegido nos asigna a cada cliente una probabilidad de éxit
 
 
 ```{r confusion}
-ALPHA=0.5
+ALPHA=0.42
 Confusion_Test=table(df_segurohistoricaTest$CAMP_DEPOSITOS,df_segurohistoricaTest$prediccion>=ALPHA)
 Confusion_Test
 ```
+
+
+```{r resultadofinal}
+df_seguronueva$prediccion=predict(modelo4, newdata=df_seguronueva,type="response")
+
+ALPHA=0.42
+df_seguronueva$resultado= c(df_seguronueva$prediccion>=ALPHA)
+df_seguronueva$resultado=as.integer(df_seguronueva$resultado)
+
+head(df_seguronueva, 20)
+
+write.csv(df_seguronueva, file = "outputmodel.csv", row.names = FALSE)
+
+```
+
 
 En este caso seleccionaríamos 1'066 clientes (2ª columna 367+699), de los que 699 serían éxito. Las métricas asociadas a esta matriz de confusión serían:
 
