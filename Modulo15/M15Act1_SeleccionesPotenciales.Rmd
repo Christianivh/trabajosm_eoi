@@ -2,10 +2,10 @@
 title: "Caso Analítica de Marketing"
 author: "Christian Vasquez Hernandez"
 output:
+  word_document: default
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
-  word_document: default
 ---
 
 
@@ -56,6 +56,9 @@ Para la ejecución de este documento es importante que estén cargadas las libre
 ```{r librerias, include=FALSE}
 library(ROCR)
 library(caTools)
+library(randomForest)
+library(xgboost)
+
 ```
 
 Fijamos el directorio de trabajo en la carpeta donde esté contenido el fichero "Campaña Historica Seguro Ahorro.csv" y "Campaña Nueva Seguro de Ahorro.csv" mediante el comando setwd.
@@ -276,6 +279,8 @@ IV_RANGO_INGRESOS
 
 Comenzamos con el modelo más sencillo que incluye una sola variable independiente. Hemos seleccionado la variable CAT_EDAD al ser la de mayor IV.
 
+### Modelo Regresion Logistica:
+
 ```{r modelo1}
 print("Modelo 1")
 modelo1=glm(CAMP_DEPOSITOS~CAT_EDAD, data=df_segurohistoricaTrain[,-1],family=binomial(link="logit"))
@@ -321,34 +326,103 @@ BIC(modelo5)
 Las métricas AIC y BIC equilibran la ganancia de información al meter una nueva variable con la pérdida por complicar el modelo de forma que previenen la inclusión de factores que no aporten capacidad predictiva.
 
 
+
+### Modelo Random Forest:
+
+Calculando modelos, en base a lo trabajado anteriormente, ajustamos en base a las variables del modelo 4 y modelo 5
+```{r randomForest}
+#print("Modelo 1")
+#modeloRF1=randomForest(CAMP_DEPOSITOS~CAT_EDAD, data=df_segurohistoricaTrain[,-1],importance = TRUE, maxnodes=10,mtry=1,ntree=10)
+#summary(modeloRF1)
+
+#print("Modelo 2")
+#modeloRF2=randomForest(CAMP_DEPOSITOS~CAT_EDAD+NIVEL_ESTUDIOS, data=df_segurohistoricaTrain[,-1],importance = TRUE, maxnodes=10,mtry=2,ntree=10)
+#summary(modeloRF2)
+
+#print("Modelo 3")
+#modeloRF3=randomForest(CAMP_DEPOSITOS~CAT_EDAD+NIVEL_ESTUDIOS+SEXO, data=df_segurohistoricaTrain[,-1],importance = TRUE, maxnodes=10,mtry=3,ntree=10)
+#summary(modeloRF3)
+
+print("Modelo 4")
+modeloRF4=randomForest(CAMP_DEPOSITOS~CAT_EDAD+NIVEL_ESTUDIOS+SEXO+ESTADO_CIVIL, data=df_segurohistoricaTrain[,-1],importance = TRUE, maxnodes=60,mtry=4,ntree=70)
+summary(modeloRF4)
+
+print("Modelo 5")
+modeloRF5=randomForest(CAMP_DEPOSITOS~., data=df_segurohistoricaTrain[,-1],importance = TRUE, maxnodes=50,mtry=5,ntree=50)
+summary(modeloRF5)
+```
+
+
 ### Bloque de evaluación y selección de modelo.
+
+
+### Validando su Accuracy del modelo Random Forest
+
+```{r}
+accuracies <-c()
+
+#prediccion=predict(modeloRF1,df_segurohistoricaTrain)
+#t<-table(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS)
+#print(t)
+#df_segurohistoricaTrain$Rf1 <- prediccion == df_segurohistoricaTrain$CAMP_DEPOSITOS
+#accuracy <- sum(as.numeric(df_segurohistoricaTrain$Rf1))/nrow(df_segurohistoricaTrain)
+#accuracies <- c(accuracies,accuracy)
+#print(accuracy)
+
+#accuracies <-c()
+#prediccion=predict(modeloRF2, df_segurohistoricaTrain)
+#t<-table(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS)
+#print(t)
+#df_segurohistoricaTrain$Rf2 <- prediccion == df_segurohistoricaTrain$CAMP_DEPOSITOS
+#accuracy <- sum(as.numeric(df_segurohistoricaTrain$Rf2))/nrow(df_segurohistoricaTrain)
+#accuracies <- c(accuracies,accuracy)
+#print(accuracy)
+
+#prediccion=predict(modeloRF3,df_segurohistoricaTrain)
+#t<-table(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS)
+#print(t)
+#df_segurohistoricaTrain$Rf3 <- prediccion == df_segurohistoricaTrain$CAMP_DEPOSITOS
+#accuracy <- sum(as.numeric(df_segurohistoricaTrain$Rf3))/nrow(df_segurohistoricaTrain)
+#accuracies <- c(accuracies,accuracy)
+#print(accuracy)
+
+prediccion=predict(modeloRF4,df_segurohistoricaTrain)
+t<-table(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS)
+print(t)
+df_segurohistoricaTrain$Rf4 <- prediccion == df_segurohistoricaTrain$CAMP_DEPOSITOS
+accuracy <- sum(as.numeric(df_segurohistoricaTrain$Rf4))/nrow(df_segurohistoricaTrain)
+accuracies <- c(accuracies,accuracy)
+print(accuracy)
+
+prediccion=predict(modeloRF5,df_segurohistoricaTrain)
+t<-table(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS)
+print(t)
+df_segurohistoricaTrain$Rf5 <- prediccion == df_segurohistoricaTrain$CAMP_DEPOSITOS
+accuracy <- sum(as.numeric(df_segurohistoricaTrain$Rf5))/nrow(df_segurohistoricaTrain)
+accuracies <- c(accuracies,accuracy)
+print(accuracy)
+
+```
+
+
+
+### Validando su Accuracy del modelo regression logistica
 
 Para evaluar y seleccionar un modelo vamos a utilizar una métrica ampliamente aceptada en los problemas de clasificación se utilice la técnica que se utilice: AUC (Area Under Curve) o área bajo la curva.
 
-En R podemos calcular el AUC de forma sencilla utlizando el paquete ROCR.
+Para el primer modelo vemos que el AUC en entrenamiento 0,7020 es similar al AUC en validación 0,6986. Esto es importante puesto que nos muestra que el modelo tiene la misma capacidad predictiva en el conjunto en el que se ha entrenado que en otro conjunto del cual no se ha entrenado, confirmando que los patrones aprendidos por el modelo son generales, por lo que no se observa sobreajuste u overfitting.
 
-```{r auc1}
+```{r aucs}
 prediccion=predict(modelo1,type="response")
 Pred_auxiliar= prediction(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS, label.ordering = NULL)
 auc.tmp = performance(Pred_auxiliar, "auc");
 auc_modelo1_train = as.numeric(auc.tmp@y.values)
-auc_modelo1_train
 
 prediccion=predict(modelo1, newdata=df_segurohistoricaVal,type="response")
 Pred_auxiliar = prediction(prediccion, df_segurohistoricaVal$CAMP_DEPOSITOS, label.ordering = NULL)
 auc.tmp = performance(Pred_auxiliar, "auc");
 auc_modelo1_val = as.numeric(auc.tmp@y.values)
-auc_modelo1_val
-```
 
-El AUC es una métrica que toma valores entre 0,5 y 1. Siendo 0,5 el valor que se corresponde con un modelo aleatorio y 1 el valor que se corresponde con un modelo que clasifica perfectamente.
-
-Para el primer modelo vemos que el AUC en entrenamiento 0,7020 es similar al AUC en validación 0,6986. Esto es importante puesto que nos muestra que el modelo tiene la misma capacidad predictiva en el conjunto en el que se ha entrenado que en otro conjunto del cual no se ha entrenado, confirmando que los patrones aprendidos por el modelo son generales, por lo que no se observa sobreajuste u overfitting.
-
-Calculamos la métrica AUC para el resto de modelos:
-
-
-```{r aucs}
 prediccion=predict(modelo2,type="response")
 Pred_auxiliar= prediction(prediccion, df_segurohistoricaTrain$CAMP_DEPOSITOS, label.ordering = NULL)
 auc.tmp = performance(Pred_auxiliar, "auc");
@@ -388,6 +462,7 @@ prediccion=predict(modelo5, newdata=df_segurohistoricaVal,type="response")
 Pred_auxiliar = prediction(prediccion, df_segurohistoricaVal$CAMP_DEPOSITOS, label.ordering = NULL)
 auc.tmp = performance(Pred_auxiliar, "auc");
 auc_modelo5_val = as.numeric(auc.tmp@y.values)
+
 ```
 
 Representamos los resultados:
@@ -405,7 +480,7 @@ colnames(A)=c("Modelo1","Modelo2","Modelo3","Modelo4","Modelo5")
 A
 ```
 
-Podemos apreciar que el modelo con mayor AUC en validación es el modelo 4, por lo que este es el modelo elegido puesto que presenta los mejores resultados en el conjunto de validación. Es importante destacar que el modelo con mejor AUC en entrenamiento es el modelo5 y esto se debe a que siempre que se incluye una nueva variable el modelo resultante obtiene mejores resultados contra este conjunto de datos pero si el patrón no es general o la variable no tiene capacidad predictiva, se traduce en un empeoramiento de la capacidad predictiva del modelo como se aprecia en el conjunto de validación.
+Podemos apreciar que el modelo con mayor AUC en validación es el modelo 4, por lo que este es el modelo elegido puesto que presenta los mejores resultados en el conjunto de validación. 
 
 Una vez elegido el modelo4 sólo nos queda evaluar su capacidad y esto se realiza utilizando el conjunto de test que no ha sido utilizado en ninguna parte del proceso de construcción y selección del modelo.
 
@@ -455,27 +530,12 @@ El modelo predictivo elegido nos asigna a cada cliente una probabilidad de éxit
 
 
 ```{r confusion}
-ALPHA=0.42
+ALPHA=0.4248821
 Confusion_Test=table(df_segurohistoricaTest$CAMP_DEPOSITOS,df_segurohistoricaTest$prediccion>=ALPHA)
 Confusion_Test
 ```
 
-
-```{r resultadofinal}
-df_seguronueva$prediccion=predict(modelo4, newdata=df_seguronueva,type="response")
-
-ALPHA=0.42
-df_seguronueva$resultado= c(df_seguronueva$prediccion>=ALPHA)
-df_seguronueva$resultado=as.integer(df_seguronueva$resultado)
-
-head(df_seguronueva, 20)
-
-write.csv(df_seguronueva, file = "outputmodel.csv", row.names = FALSE)
-
-```
-
-
-En este caso seleccionaríamos 1'066 clientes (2ª columna 367+699), de los que 699 serían éxito. Las métricas asociadas a esta matriz de confusión serían:
+En este caso seleccionaríamos 1'508 clientes (2ª columna 612+896), de los que 896 serían éxito. Las métricas asociadas a esta matriz de confusión serían:
 
 ```{r confmetricas}
 Accuracy_Test= (sum(df_segurohistoricaTest$CAMP_DEPOSITOS==1 & df_segurohistoricaTest$prediccion>=ALPHA)+sum(df_segurohistoricaTest$CAMP_DEPOSITOS==0 & df_segurohistoricaTest$prediccion<ALPHA))/length(df_segurohistoricaTest$CAMP_DEPOSITOS)
@@ -517,15 +577,14 @@ KS=max(BANK_KS$DIFF)
 KS
 ```
 
-y el valor donde se alcanza este valor es el que nos va a permitir seleccionar el umbral 5644
+y el valor donde se alcanza este valor es el que nos va a permitir seleccionar el umbral
 
 ```{r umbralKS}
 which(BANK_KS$DIFF==KS)
-BANK_KS[5095,c("CAMP_DEPOSITOS","prediccion")]
+BANK_KS[1590,c("CAMP_DEPOSITOS","prediccion")]
 ```
 
-en este caso el umbral seleccionado de máxima discriminación sería 
-
+en este caso el umbral seleccionado de máxima discriminación sería 0.3629083
 
 ### Bloque de selección de umbral como el punto óptimo estadístico (F1-Score)
 
@@ -548,7 +607,73 @@ y el valor donde se alcanza este valor es el que nos va a permitir seleccionar e
 
 ```{r umbralF1}
 which(BANK_KS$F1Score==max(BANK_KS$F1Score))
-BANK_KS[8511,c("CAMP_DEPOSITOS","prediccion")]
+BANK_KS[2303,c("CAMP_DEPOSITOS","prediccion")]
 ```
 
-en este caso el umbral seleccionado que maximiza el F1-Score es 0.308060.
+en este caso el umbral seleccionado que maximiza el F1-Score es 0.303446.
+
+
+### Bloque de selección de umbral como el punto que maximiza el Beneficio de la campaña
+
+Si consideramos un coste por llamada y un beneficio por venta
+
+```{r costes}
+costeLlamada=10
+beneficioVenta=15
+```
+
+Podemos definir el beneficio o pérdida que tendrán nuestras acciones
+
+```{r beneficios}
+BANK_KS$BeneficioTP=beneficioVenta-costeLlamada
+BANK_KS$BeneficioTN=0
+BANK_KS$PerdidaFP=-costeLlamada
+BANK_KS$PerdidaFN=-beneficioVenta
+```
+
+Con estos datos podemos calcular el beneficio financiero en función al umbral de corte para seleccionar el punto máximo que nos defina el umbral a considerar
+
+```{r umbralBeneficio}
+BANK_KS$BeneficioFinan=BANK_KS$EXITOS_ACUM*BANK_KS$BeneficioTP+
+  BANK_KS$FRACASOS_ACUM*BANK_KS$PerdidaFP
+plot(BANK_KS$BeneficioFinan,xlab="",ylab="Beneficio Financiero")
+max(BANK_KS$BeneficioFinan)
+which(BANK_KS$BeneficioFinan==max(BANK_KS$BeneficioFinan))
+BANK_KS[422,c("CAMP_DEPOSITOS","prediccion")]
+```
+
+En este caso tenemos varios puntos máximos por lo que podemos seleccionar uno, eligiendo el primero, el umbral sería del 0.6921934 y hubiéramos obtenido un beneficio de 565.
+
+Pero podemos considerar que dejar de llamar a un cliente que va a contratar supone un coste de oportunidad en el que incurrimos por lo que podemos calcular el umbral que maximice el beneficio teniendo en cuenta el coste de oportunidad:
+
+```{r umbralOprotunidad}
+BANK_KS$Oportunidad=BANK_KS$EXITOS_ACUM*BANK_KS$BeneficioTP+
+  (BANK_KS$EXITOS_TOT-BANK_KS$EXITOS_ACUM)*BANK_KS$PerdidaFN+
+  BANK_KS$FRACASOS_ACUM*BANK_KS$PerdidaFP+
+  (BANK_KS$FRACASOS_TOT-BANK_KS$FRACASOS_ACUM)*BANK_KS$BeneficioTN
+plot(BANK_KS$Oportunidad,xlab="",ylab="Beneficio - Coste de Oportunidad")
+max(BANK_KS$Oportunidad)
+which(BANK_KS$Oportunidad==max(BANK_KS$Oportunidad))
+BANK_KS[1546,c("CAMP_DEPOSITOS","prediccion")]
+```
+
+En este caso, el umbral se fijaría en el 0.3629083 y hubiéramos obtenido una perdida de -14.425.
+
+
+# Escribiendo del Resultado FINAL
+
+___Revisando los resultados obtenidos, nos quedamos con el modelo de Regresion logistica Modelo 4, ya que tiene mejores resultados en accuracy, por lo que generamos la data propuesta para el ejercicio.___
+
+```{r resultadofinal}
+df_seguronueva$prediccion=predict(modelo4, newdata=df_seguronueva,type="response")
+
+ALPHA=0.6921934
+df_seguronueva$resultado= c(df_seguronueva$prediccion>=ALPHA)
+df_seguronueva$resultado=as.integer(df_seguronueva$resultado)
+
+head(df_seguronueva, 10)
+
+write.csv(df_seguronueva, file = "outputmodel.csv", row.names = FALSE)
+
+```
+
